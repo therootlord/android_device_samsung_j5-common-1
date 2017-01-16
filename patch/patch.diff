@@ -1,8 +1,43 @@
+diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java
+--- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Wed Apr 20 08:50:20 2016
++++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioModeStateMachine.java	Thu May 12 01:31:40 2016
+@@ -151,7 +151,12 @@
+         public void enter() {
+             if (mIsInitialized) {
+                 Log.i(LOG_TAG, "Abandoning audio focus: now UNFOCUSED");
++                boolean setRealcallAudioParams = SystemProperties
++                    .getBoolean("ro.telephony.samsung.realcall", false);
+                 mAudioManager.abandonAudioFocusForCall();
++                if (setRealcallAudioParams) {
++                    mAudioManager.setParameters("realcall=off");
++                }
+                 mAudioManager.setMode(AudioManager.MODE_NORMAL);
+
+                 mMostRecentMode = AudioManager.MODE_NORMAL;
+@@ -292,6 +297,8 @@
+             Log.i(LOG_TAG, "Audio focus entering SIM CALL state");
+             boolean setMsimAudioParams = SystemProperties
+                     .getBoolean("ro.multisim.set_audio_params", false);
++            boolean setRealcallAudioParams = SystemProperties
++                    .getBoolean("ro.telephony.samsung.realcall", false);
+             Call call = mCallAudioManager.getForegroundCall();
+
+             mAudioManager.requestAudioFocusForCall(AudioManager.STREAM_VOICE_CALL,
+@@ -305,6 +312,9 @@
+                 } else if (phoneId == 1) {
+                     mAudioManager.setParameters("phone_type=cp2");
+                 }
++                if(setRealcallAudioParams){
++                    mAudioManager.setParameters("realcall=on");
++                }
+             }
+
+             mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 diff --git a/hardware/qcom/audio-caf/msm8916/hal/msm8974/platform.c b/hardware/qcom/audio-caf/msm8916/hal/msm8974/platform.c
 index 945dc40..ecdf37b 100644
 --- a/hardware/qcom/audio-caf/msm8916/hal/msm8974/platform.c
 +++ b/hardware/qcom/audio-caf/msm8916/hal/msm8974/platform.c
-@@ -864,8 +864,15 @@ static int hw_util_open(int card_no)
+@@ -883,8 +883,15 @@ static int hw_util_open(int card_no)
      ALOGD("%s Opening device %s\n", __func__, dev_name);
      fd = open(dev_name, O_WRONLY);
      if (fd < 0) {
@@ -24,7 +59,7 @@ diff --git a/hardware/qcom/audio-caf/msm8916/hal/msm8916/platform.c b/hardware/q
 index 32be300..1114690 100644
 --- a/hardware/qcom/audio-caf/msm8916/hal/msm8916/platform.c
 +++ b/hardware/qcom/audio-caf/msm8916/hal/msm8916/platform.c
-@@ -1044,8 +1044,15 @@ static int hw_util_open(int card_no)
+@@ -1063,8 +1063,15 @@ static int hw_util_open(int card_no)
      ALOGD("%s Opening device %s\n", __func__, dev_name);
      fd = open(dev_name, O_WRONLY);
      if (fd < 0) {
@@ -46,7 +81,7 @@ diff --git a/frameworks/base/core/jni/fd_utils-inl.h b/frameworks/base/core/jni/
 index f245a7fc..69f9e0b5 100644
 --- a/frameworks/base/core/jni/fd_utils-inl.h
 +++ b/frameworks/base/core/jni/fd_utils-inl.h
-@@ -391,13 +391,9 @@ class FileDescriptorTable {
+@@ -379,13 +379,9 @@ class FileDescriptorTable {
        }
  
        FileDescriptorInfo* info = FileDescriptorInfo::createFromFd(fd);
@@ -62,7 +97,7 @@ index f245a7fc..69f9e0b5 100644
      }
  
      if (closedir(d) == -1) {
-@@ -425,7 +421,10 @@ class FileDescriptorTable {
+@@ -413,7 +409,10 @@ class FileDescriptorTable {
          continue;
        }
  
@@ -88,31 +123,6 @@ index f10ba96..ae84296 100644
  key 256   BUTTON_1
  key 257   BUTTON_2
  key 258   BUTTON_3
-diff -ur a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java
---- a/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java	Wed Apr 20 08:50:20 2016
-+++ b/packages/services/Telecomm/src/com/android/server/telecom/CallAudioManager.java	Thu May 12 01:31:40 2016
-@@ -134,9 +134,20 @@
-                     Call call = mCallsManager.getForegroundCall();
-                     boolean setMsimAudioParams = SystemProperties
-                             .getBoolean("ro.multisim.set_audio_params", false);
-+					boolean setSamsungRealcallParams = SystemProperties
-+							.getBoolean("ro.telephony.samsung.realcall", false);		
- 
-                     Log.v(this, "Request to change audio mode from %s to %s", modeToString(oldMode),
-                             modeToString(newMode));
-+							
-+					if(setSamsungRealcallParams) {
-+						if(newMode == 0) {
-+							mAudioManager.setParameters("realcall=off");
-+						} else if(newMode == AudioManager.MODE_IN_COMMUNICATION || newMode == AudioManager.MODE_RINGTONE
-+						|| newMode == AudioManager.MODE_IN_CALL) {
-+							mAudioManager.setParameters("realcall=on");
-+						}
-+					}		
- 
-                     if (oldMode != newMode) {
-                         if (oldMode == AudioManager.MODE_IN_CALL &&
-
 diff -ur a/hardware/qcom/fm/fmapp2/src/com/caf/fmradio/FMRadioService.java b/hardware/qcom/fm/fmapp2/src/com/caf/fmradio/FMRadioService.java
 --- a/hardware/qcom/fm/fmapp2/src/com/caf/fmradio/FMRadioService.java	Mon Jun 20 17:28:46 2016
 +++ b/hardware/qcom/fm/fmapp2/src/com/caf/fmradio/FMRadioService.java	Mon Jun 27 10:45:01 2016
