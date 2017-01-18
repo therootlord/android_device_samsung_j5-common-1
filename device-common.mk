@@ -80,8 +80,7 @@ PRODUCT_PACKAGES += \
 
 # Boot jars
 PRODUCT_BOOT_JARS += \
-	qcom.fmradio \
-	tcmiface
+	qcom.fmradio
 
 # BoringSSL Hacks
 PRODUCT_PACKAGES += \
@@ -261,6 +260,7 @@ PRODUCT_PACKAGES += \
 	libstlport \
 	datatop \
 	sockev \
+	tcmiface \
 	librmnetctl
 
 # OMX
