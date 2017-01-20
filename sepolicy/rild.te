@@ -1,4 +1,5 @@
 #============= rild ==============
+allow rild rild:capability { dac_read_search };
 allow rild proc_net:file { open read write };
 allow rild storage_file:lnk_file { read };
 allow rild mnt_user_file:lnk_file { read };

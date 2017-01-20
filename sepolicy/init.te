@@ -1,4 +1,5 @@
 #============= init ==============
+allow init socket_device:sock_file w_file_perms;
 allow init self:process execmem;
 allow init vfat:dir search;
 allow init qmuxd_socket:sock_file { write };
