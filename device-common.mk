@@ -318,6 +318,8 @@ PRODUCT_PACKAGES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+	media.stagefright.legacyencoder=true \
+	media.stagefright.less-secure=true \
 	ro.use_data_netmgrd=false \
 	dalvik.vm.heapgrowthlimit=128m \
 	ro.security.icd.flagmode=single \
