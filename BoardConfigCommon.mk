@@ -137,8 +137,8 @@ TARGET_KERNEL_SOURCE := kernel/samsung/galaxy
 # Lights
 TARGET_PROVIDES_LIBLIGHT := false
 
-# malloc implementation - use dlmalloc for now
-MALLOC_SVELTE := false
+# malloc implementation
+MALLOC_SVELTE := true
 
 # Partition sizes
 BOARD_BOOTIMAGE_PARTITION_SIZE      := 13631488
