@@ -312,6 +312,7 @@ PRODUCT_PACKAGES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+	qcom.hw.aac.encoder=true \
 	media.stagefright.legacyencoder=true \
 	media.stagefright.less-secure=true \
 	ro.use_data_netmgrd=false \
