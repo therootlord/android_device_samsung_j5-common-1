@@ -18,6 +18,10 @@ PRODUCT_PACKAGES += libGLES_android
 
 PRODUCT_PACKAGES += libtime_genoff
 
+# Bootctrl
+PRODUCT_PACKAGES += \
+	bootctrl.msm8916
+
 # ANT+
 PRODUCT_PACKAGES += \
 	AntHalService \
