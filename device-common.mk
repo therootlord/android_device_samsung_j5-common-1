@@ -247,6 +247,7 @@ PRODUCT_PACKAGES += Snap
 
 # Misc
 PRODUCT_PACKAGES += \
+	busybox \
 	curl \
 	libbson \
 	libcurl \
