@@ -34,13 +34,11 @@ PRODUCT_PACKAGES += \
 	Tag \
 	com.android.nfc_extras \
 	com.android.nfc.helper \
-	NfcNci \
-	libnfc-nci
+	libnfc_nci_jni \
+	libnfc_jni
 
 # NFC prebuilt files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
-	$(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
 	$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # NFC workaround
