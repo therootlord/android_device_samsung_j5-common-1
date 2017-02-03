@@ -1,5 +1,4 @@
 #============= init ==============
-allow init socket_device:sock_file w_file_perms;
 allow init self:process execmem;
 allow init vfat:dir search;
 allow init qmuxd_socket:sock_file { write };
@@ -10,9 +9,8 @@ allow init thermal_device:chr_file { ioctl write };
 allow init smem_log_device:chr_file { ioctl write };
 allow init mpctl_socket:sock_file { write };
 allow init mpctl_data_file:file { append write };
-
 allow init diag_exec:file { read open getattr execute };
 allow init efs_file:dir { mounton };
 allow init rootfs:dir { relabelfrom };
 allow init wcnss_device:chr_file { write };
-
+allow init debugfs:dir mounton;
