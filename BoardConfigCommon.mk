@@ -50,6 +50,3 @@ BOARD_FLASH_BLOCK_SIZE              := 131072
 TARGET_RIL_VARIANT := caf
 #override to enable audio.
 BOARD_PROVIDES_LIBRIL := false
-
-BOARD_SEPOLICY_DIRS += \
-    device/samsung/gprimelte-common/sepolicy
