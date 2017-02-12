@@ -15,9 +15,6 @@
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# Pull the proprietary blobs
-$(call inherit-product, vendor/qcom/binaries/msm8916-32/graphics/graphics-vendor.mk)
-
 # Inherit from common
 $(call inherit-product, device/samsung/msm8916-common/msm8916.mk)
 
