@@ -2,10 +2,18 @@ on init
     # Shims
     export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:/system/lib/libcrypto.so|libboringssl-compat.so
 
+on early-boot
+	start perm_fixup
+
 on boot
 
 service config_ksm /system/bin/sh /init.ksm.sh
     class late_start
+    user root
+    oneshot
+
+service perm_fixup /system/bin/sh /init.perm_fixup.sh
+    class core
     user root
     oneshot
 
