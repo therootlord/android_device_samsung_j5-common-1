@@ -1,0 +1,12 @@
+diff -ur a/frameworks/base/location/java/android/location/GpsStatus.java b/frameworks/base/location/java/android/location/GpsStatus.java
+--- a/frameworks/base/location/java/android/location/GpsStatus.java
++++ b/frameworks/base/location/java/android/location/GpsStatus.java
+@@ -190,6 +190,7 @@ public final class GpsStatus {
+                         (svidWithFlags[i] & GnssStatus.GNSS_SV_FLAGS_HAS_ALMANAC_DATA) != 0;
+                 satellite.mUsedInFix =
+                         (svidWithFlags[i] & GnssStatus.GNSS_SV_FLAGS_USED_IN_FIX) != 0;
++            if (satellite.mSnr > 0) satellite.mUsedInFix = true;
+             }
+         }
+     }
+
