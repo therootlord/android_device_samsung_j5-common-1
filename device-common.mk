@@ -86,10 +86,15 @@ ADDITIONAL_BUILD_PROPERTIES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+	init.copy_db.sh \
 	init.target.rc
 
+# Telephony database
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/db/telephony.db:system/vendor/telephony.db
+
 # OTA scripts
- PRODUCT_COPY_FILES += \
+PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/releasetools/copy_nfc_configs.sh:install/bin/copy_nfc_configs.sh \
 	$(LOCAL_PATH)/releasetools/copy_variant_blobs.sh:install/bin/copy_variant_blobs.sh \
 	$(LOCAL_PATH)/releasetools/update_baseband.sh:install/bin/update_baseband.sh
