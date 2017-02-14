@@ -107,11 +107,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	camera2.portability.force_api=1 \
 	ro.secure=0
 
-# Audio configurations
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-	$(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
-
 # Configuration files
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/Diag.cfg:system/etc/Diag.cfg \
