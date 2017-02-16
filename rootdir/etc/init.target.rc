@@ -2,8 +2,8 @@ on init
     # Shims
     export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:/system/lib/libcrypto.so|libboringssl-compat.so:/system/vendor/lib/libwvm.so|libwvm_shim.so
 
-on early-boot
-	start perm_fixup
+#on early-boot
+#	start perm_fixup
 
 on boot
 
@@ -16,6 +16,7 @@ service perm_fixup /system/bin/sh /init.perm_fixup.sh
     class core
     user root
     oneshot
+    disabled
 
 on property:sys.boot_completed=1
     start config_ksm
