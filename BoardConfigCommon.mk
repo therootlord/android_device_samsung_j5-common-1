@@ -22,6 +22,9 @@ LOCAL_PATH := device/samsung/gprimelte-common
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := msm8916
 
+# Audio
+USE_STOCK_MIXER_PATHS := 1
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 # Custom RIL class
