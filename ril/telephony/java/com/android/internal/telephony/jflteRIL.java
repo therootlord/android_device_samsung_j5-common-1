@@ -409,7 +409,6 @@ public class jflteRIL extends RIL implements CommandsInterface {
             switch (rr.mRequest) {
                 case RIL_REQUEST_VOICE_REGISTRATION_STATE: ret = responseVoiceDataRegistrationState(p, false); break;
                 case RIL_REQUEST_DATA_REGISTRATION_STATE: ret = responseVoiceDataRegistrationState(p, true); break;
-                case RIL_REQUEST_OPERATOR: ret =  operatorCheck(p); break;
                 default:
                     throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
             }
@@ -422,17 +421,6 @@ public class jflteRIL extends RIL implements CommandsInterface {
             rr.mResult.sendToTarget();
         }
         return rr;
-    }
-
-    private Object
-    operatorCheck(Parcel p) {
-        String response[] = (String[])responseStrings(p);
-        for(int i=0; i<2; i++){
-            if (response[i]!= null){
-                response[i] = Operators.operatorReplace(response[i]);
-            }
-        }
-        return response;
     }
 
     private Object
