@@ -46,10 +46,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
 
-# NFC workaround
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilt/setNFCperms:system/etc/init.d/setNFCperms
-
 # Audio
 PRODUCT_PACKAGES += \
 	libFLAC
