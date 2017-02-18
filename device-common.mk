@@ -29,6 +29,9 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 PRODUCT_PACKAGES += \
 	RemovePackages
 
+# Camera
+PRODUCT_PACKAGES += Snap
+
 #NFC
 PRODUCT_PACKAGES += \
 	Tag \
