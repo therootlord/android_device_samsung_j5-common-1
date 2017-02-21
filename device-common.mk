@@ -113,7 +113,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	media.stagefright.legacyencoder=true \
 	media.stagefright.less-secure=true \
 	ro.use_data_netmgrd=false \
-	ro.telephony.default_network=9 \
 	persist.radio.sib16_support=1 \
 	ro.gps.agps_provider=1 \
 	ro.pip.gated=0 \
