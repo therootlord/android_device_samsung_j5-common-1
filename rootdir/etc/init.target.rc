@@ -2,17 +2,6 @@ on init
     # Shims
     export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so:/system/lib/libcrypto.so|libboringssl-compat.so
 
-#on early-boot
-#	start perm_fixup
-
-on boot
-
-service perm_fixup /system/bin/sh /init.perm_fixup.sh
-    class core
-    user root
-    oneshot
-    disabled
-
 service_redefine ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio

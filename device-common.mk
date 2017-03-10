@@ -68,7 +68,6 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-	init.perm_fixup.sh \
 	init.target.rc
 
 # Keylayout
