@@ -7,11 +7,6 @@ on init
 
 on boot
 
-service config_ksm /system/bin/sh /init.ksm.sh
-    class late_start
-    user root
-    oneshot
-
 service perm_fixup /system/bin/sh /init.perm_fixup.sh
     class core
     user root
@@ -26,6 +21,3 @@ service_redefine ril-daemon /system/bin/rild
     socket rild-cas stream 660 casdrm mmb
     user root
     group radio cache inet misc audio readproc log wakelock qcom_diag system drmrpc vpn shell sdcard_r sdcard_rw
-
-on property:sys.boot_completed=1
-    start config_ksm
