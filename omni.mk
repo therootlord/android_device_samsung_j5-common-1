@@ -1,13 +1,14 @@
 # Release name
 PRODUCT_RELEASE_NAME := Samsung Galaxy Grand Prime
-CM_BUILDTYPE := NIGHTLY
+ROM_BUILDTYPE := NIGHTLY
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 540
 TARGET_SCREEN_HEIGHT := 960
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common Omni stuff.
+$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/omni/config/gsm.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
