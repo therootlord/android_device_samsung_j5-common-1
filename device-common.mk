@@ -46,6 +46,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
 
+ifeq ($(BOARD_NFC_CHIPSET),pn547)
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/nfc/route.xml:system/etc/param/route.xml \
+	$(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+	$(LOCAL_PATH)/nfc/libnfc-sec-hal-pn547.conf:system/etc/libnfc-sec-hal.conf \
+	$(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
+else
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/nfc/libnfc-sec-hal-sec.conf:system/etc/libnfc-sec-hal.conf \
+	$(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf
+endif
+
 # Audio
 PRODUCT_PACKAGES += \
 	libFLAC
