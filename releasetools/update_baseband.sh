@@ -44,11 +44,21 @@ if [ -d ${RADIO_DIR} ]; then
 	cd ${RADIO_DIR} 
 
 	# flash the firmware
-	for FILE in `find . -type f` ; do
-		echo "Flashing ${FILE} to ${BLOCK_DEV_DIR}/${FILE} ..."
-		dd if=${FILE} of=${BLOCK_DEV_DIR}/${FILE}
+	for FILE in `find . -type f | cut -c 3-` ; do
+		if [ -e ${BLOCK_DEV_DIR}/${FILE} ]; then
+			echo "Flashing ${FILE} to ${BLOCK_DEV_DIR}/${FILE} ..."
+			dd if=${FILE} of=${BLOCK_DEV_DIR}/${FILE}
+		fi
 	done
 fi
+
+# Get the device name
+DEVICE_SHORT=$(getprop ro.bootloader | cut -c 1-5)
+# grep the modem partition for baseband version and set it
+BASEBAND_VER=$(strings ${BLOCK_DEV_DIR}/modem | grep ${DEVICE_SHORT} | head -1)
+
+echo "Setting baseband version to ${BASEBAND_VER}"
+echo "gsm.version.baseband=${BASEBAND_VER}" >> /system/build.prop
 
 # remove the device blobs
 echo "Cleaning up ..."
