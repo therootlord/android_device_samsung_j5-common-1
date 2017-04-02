@@ -2,7 +2,7 @@ diff --git a/frameworks/base/core/jni/fd_utils-inl.h b/frameworks/base/core/jni/
 index f245a7fc..69f9e0b5 100644
 --- a/frameworks/base/core/jni/fd_utils-inl.h
 +++ b/frameworks/base/core/jni/fd_utils-inl.h
-@@ -410,13 +410,9 @@ class FileDescriptorTable {
+@@ -424,13 +424,9 @@ class FileDescriptorTable {
        }
  
        FileDescriptorInfo* info = FileDescriptorInfo::createFromFd(fd);
@@ -18,7 +18,7 @@ index f245a7fc..69f9e0b5 100644
      }
  
      if (closedir(d) == -1) {
-@@ -444,7 +440,10 @@ class FileDescriptorTable {
+@@ -458,7 +454,10 @@ class FileDescriptorTable {
          continue;
        }
  
