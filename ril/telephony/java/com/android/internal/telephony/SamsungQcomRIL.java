@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2014, The CyanogenMod Project. All rights reserved.
+ * Copyright (c) 2014-2016, The CyanogenMod Project. All rights reserved.
+ * Copyright (c) 2017, The LineageOS Project. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,6 +61,10 @@ public class SamsungQcomRIL extends RIL {
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
+        if (PhoneNumberUtils.isEmergencyNumber(address)) {
+            dialEmergencyCall(address, clirMode, result);
+            return;
+        }
 
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
 
@@ -77,6 +82,23 @@ public class SamsungQcomRIL extends RIL {
             rr.mParcel.writeInt(uusInfo.getDcs());
             rr.mParcel.writeByteArray(uusInfo.getUserData());
         }
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+
+        send(rr);
+    }
+
+    private void
+    dialEmergencyCall(String address, int clirMode, Message result) {
+        RILRequest rr;
+
+        rr = RILRequest.obtain(RIL_REQUEST_DIAL_EMERGENCY_CALL, result);
+        rr.mParcel.writeString(address);
+        rr.mParcel.writeInt(clirMode);
+        rr.mParcel.writeInt(0);        // CallDetails.call_type
+        rr.mParcel.writeInt(3);        // CallDetails.call_domain
+        rr.mParcel.writeString("");    // CallDetails.getCsvFromExtra
+        rr.mParcel.writeInt(0);        // Unknown
 
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
 
@@ -252,10 +274,22 @@ public class SamsungQcomRIL extends RIL {
         //cdma
         response[2] %= 256;
         response[4] %= 256;
+        // lte
         response[7] &= 0xff;
 
-        return new SignalStrength(response[0], response[1], response[2], response[3], response[4], response[5], response[6], response[7], response[8], response[9], response[10], response[11], true);
-
+	return new SignalStrength(response[0],
+				  response[1],
+				  response[2],
+				  response[3],
+				  response[4],
+				  response[5],
+				  response[6],
+				  response[7],
+				  response[8],
+				  response[9],
+				  response[10],
+				  response[11],
+				  true);
     }
 
     @Override
