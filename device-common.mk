@@ -91,7 +91,7 @@ PRODUCT_PACKAGES += \
 
 # Telephony database
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/db/telephony.db:system/vendor/telephony.db
+	$(LOCAL_PATH)/telephony/db/telephony.db:system/vendor/telephony.db
 
 # OTA scripts
 PRODUCT_COPY_FILES += \
