@@ -24,10 +24,6 @@ USE_QCOM_MIXER_PATHS := 0
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
-# Custom RIL class
-BOARD_RIL_CLASS    := ../../../device/samsung/gprimelte-common/ril
-PROTOBUF_SUPPORTED := true
-
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_gprimelte
 TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_gprimelte.cpp
@@ -40,8 +36,3 @@ TARGET_PROVIDES_LIBLIGHT := false
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true
-
-# RIL
-TARGET_RIL_VARIANT := caf
-# prevent sec-ril from building
-BOARD_PROVIDES_LIBRIL := false
