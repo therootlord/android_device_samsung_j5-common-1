@@ -1,10 +1,10 @@
 # Release name
-PRODUCT_RELEASE_NAME := Samsung Galaxy Grand Prime
+PRODUCT_RELEASE_NAME := Samsung Galaxy J5
 CM_BUILDTYPE := NIGHTLY
 
 # Boot animation
-TARGET_SCREEN_WIDTH := 540
-TARGET_SCREEN_HEIGHT := 960
+TARGET_SCREEN_WIDTH := 720
+TARGET_SCREEN_HEIGHT := 1280
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
