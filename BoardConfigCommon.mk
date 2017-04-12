@@ -16,7 +16,7 @@
 # Inherit from common
 include device/samsung/msm8916-common/BoardConfigCommon.mk
 
-LOCAL_PATH := device/samsung/gprimelte-common
+LOCAL_PATH := device/samsung/j5-common
 
 # Audio
 USE_QCOM_MIXER_PATHS := 0
@@ -25,8 +25,8 @@ USE_QCOM_MIXER_PATHS := 0
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Init
-TARGET_INIT_VENDOR_LIB := libinit_gprimelte
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_gprimelte.cpp
+TARGET_INIT_VENDOR_LIB := libinit_j5
+TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_j5.cpp
 
 # Release Tools
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)/releasetools
