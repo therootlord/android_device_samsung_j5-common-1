@@ -86,12 +86,7 @@ ADDITIONAL_BUILD_PROPERTIES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-	init.copy_db.sh \
 	init.target.rc
-
-# Telephony database
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/telephony/db/telephony.db:system/vendor/telephony.db
 
 # OTA scripts
 PRODUCT_COPY_FILES += \

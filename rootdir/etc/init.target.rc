@@ -1,7 +1,0 @@
-on post-fs-data
-	start copy_db
-
-service copy_db /system/bin/sh /init.copy_db.sh
-    class main
-    user root
-    oneshot
