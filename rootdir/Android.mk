@@ -1,5 +1,5 @@
 LOCAL_PATH := $(call my-dir)
-ifneq ($(filter j5lte j5nlte j53gxx, $(TARGET_DEVICE)),)
+ifneq ($(filter j5ltexx j5nltexx j53gxx, $(TARGET_DEVICE)),)
 
 ### init.target.rc
 include $(CLEAR_VARS)
