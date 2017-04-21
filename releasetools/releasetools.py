@@ -23,6 +23,8 @@ def FullOTA_InstallEnd(info):
 
     info.script.Print("Mounting /system...")
     info.script.Mount("/system")
+    info.script.Print("Checking SDK version...")
+    info.script.AppendExtra('ifelse((run_program("/tmp/install/bin/check_sdk_version.sh") != 0), abort("Refusing to downgrade system. Wipe data and system first or install proper package."));')
     info.script.Print("Updating device variant name...")
     info.script.AppendExtra('assert(run_program("/tmp/install/bin/update_device_name.sh") == 0);')
     info.script.Print("Copying device variant blobs ...")
