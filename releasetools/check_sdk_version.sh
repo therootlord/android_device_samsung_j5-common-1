@@ -19,7 +19,7 @@
 if [ -e /system/build.prop ]; then
 	SDK_VERSION=`cat /system/build.prop | grep 'ro.build.version.sdk' | cut -d '=' -f 2`
 
-	if [ ${SDK_VERSION} -lt 23 ]; then
+	if [ ${SDK_VERSION} -gt 23 ]; then
 		echo "Refusing to downgrade system. Wipe data and system first or install proper package."
 		exit 1
 	fi
