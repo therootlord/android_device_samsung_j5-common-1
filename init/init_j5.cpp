@@ -84,15 +84,25 @@ void init_target_properties(void)
 		property_set("ro.product.model", "SM-J500F");
 		gsm_lte_properties("10");
 	}
-	else if (strstr(bootloader,"J500H")) {
-		property_set("ro.build.product", "j53gxx");
-		property_set("ro.build.description", "lineage_j53gxx-userdebug 6.0.1 MOB31K 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j53gxx/j5xx:6.0.1/MOB31K/4dae919457:userdebug/test-keys");
-		property_set("ro.product.device", "j53gxx");
-		property_set("ro.product.model", "SM-J500H");
+	else if (strstr(bootloader,"J510FN")) {
+		property_set("ro.build.product", "j5xnlte");
+		property_set("ro.build.description", "lineage_j5xnlte-userdebug 6.0.1 MOB31K 4dae919457 test-keys");
+		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:6.0.1/MOB31K/4dae919457:userdebug/test-keys");
+		property_set("ro.product.device", "j5xnlte");
+		property_set("ro.product.model", "SM-J510FN");
 		property_set("persist.radio.rat_on", "combine");
 		property_set("ro.telephony.default_network", "9");
 	}
+	else if (strstr(bootloader,"J510MN")) {
+		property_set("ro.build.product", "j5xnlte);
+		property_set("ro.build.description", "lineage_j5xnlte-userdebug 6.0.1 MOB31K 4dae919457 test-keys");
+		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:6.0.1/MOB31K/4dae919457:userdebug/test-keys");
+		property_set("ro.product.device", "j5xnlte");
+		property_set("ro.product.model", "SM-J510MN");
+		property_set("persist.radio.rat_on", "combine");
+		property_set("ro.telephony.default_network", "9");
+	}
+
 
 	property_get("ro.product.device", device);
 	INFO("Found bootloader id %s setting build properties for %s device\n", bootloader, device);
