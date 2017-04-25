@@ -64,28 +64,29 @@ void init_target_properties(void)
 {
 	std::string bootloader = property_get("ro.bootloader");
 
-	if (bootloader.find("J500FN") == 0) {
-		property_set("ro.build.product", "j5nltexx");
-		property_set("ro.build.description", "lineage_j5nltexx-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5nltexx/j5nltexx:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
-		property_set("ro.product.device", "j5nltexx");
-		property_set("ro.product.model", "SM-J500FN");
+	if (bootloader.find("J510GN") == 0) {
+		property_set("ro.build.product", "j5xnlte");
+		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
+		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
+		property_set("ro.product.device", "j5xnlte");
+		property_set("ro.product.model", "SM-J510GN");
 		gsm_lte_properties("10");
 	}
-	else if (bootloader.find("J500F") == 0) {
-		property_set("ro.build.product", "j5ltexx");
-		property_set("ro.build.description", "lineage_j5ltexx-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5ltexx/j5ltexx:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
-		property_set("ro.product.device", "j5ltexx");
-		property_set("ro.product.model", "SM-J500F");
-		gsm_lte_properties("10");
+	else if (bootloader.find("J510MN") == 0) {
+		property_set("ro.build.product", "j5xnlte");
+		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
+		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
+		property_set("ro.product.device", "j5xnlte");
+		property_set("ro.product.model", "SM-J510MN");
+		property_set("persist.radio.rat_on", "combine");
+		property_set("ro.telephony.default_network", "9");
 	}
-	else if (bootloader.find("J500H") == 0) {
-		property_set("ro.build.product", "j53gxx");
-		property_set("ro.build.description", "lineage_j53gxx-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j53gxx/j53gxx:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
-		property_set("ro.product.device", "j53gxx");
-		property_set("ro.product.model", "SM-J500H");
+	else if (bootloader.find("J510FN") == 0) {
+		property_set("ro.build.product", "j5xnlte");
+		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.1 NMF26V 4dae919457 test-keys");
+		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.1/NMF26V/4dae919457:userdebug/test-keys");
+		property_set("ro.product.device", "j5xnlte");
+		property_set("ro.product.model", "SM-J510FN");
 		property_set("persist.radio.rat_on", "combine");
 		property_set("ro.telephony.default_network", "9");
 	}
