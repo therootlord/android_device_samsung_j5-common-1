@@ -16,16 +16,14 @@
 #
 
 # Detect variant and copy its specific-blobs
-VARIANT=$(/tmp/install/bin/get_variant.sh)
+. /tmp/install/bin/variant_hook.sh
 
-if [ $VARIANT == "nltexx" ]; then
-	rm /system/lib/hw/nfc_nci.msm8916.so
-	rm /system/etc/libnfc-sec.conf
-	rm /system/etc/libnfc-sec-hal.conf
-else
-	rm /system/etc/libnfc*.conf
-	rm -rf /system/priv-app/*Nfc*
-	rm -rf /system/app/*Nfc*
-fi
+DEVICE="j5${VARIANT}"
 
-exit 0
+# Mount /system
+mount_fs system
+
+# update the device name in the prop
+ui_print "Device variant is $DEVICE"
+ui_print "Updating device variant name ..."
+sed -i s/j5[a-z0-9]*/${DEVICE}/g /system/build.prop
