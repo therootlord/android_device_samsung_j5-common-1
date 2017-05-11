@@ -16,35 +16,14 @@
 #
 
 # Detect variant and copy its specific-blobs
-VARIANT=$(/tmp/install/bin/get_variant.sh)
+. /tmp/install/bin/variant_hook.sh
 
-# exit if the device is unknown
-if [ $VARIANT == "unknown" ]; then
-	exit 1
-fi
+DEVICE="j5${VARIANT}"
 
-BLOBBASE=/system/blobs/$VARIANT
+# Mount /system
+mount_fs system
 
-if [ -d $BLOBBASE ]; then
-
-	cd $BLOBBASE
-
-	# copy all the blobs
-	for FILE in `find . -type f` ; do
-		mkdir -p `dirname /system/$FILE`
-		echo "Copying $FILE to /system/$FILE ..."
-		cp $FILE /system/$FILE
-	done
-
-	# set permissions on binary files
-	for FILE in bin/* ; do
-		echo "Setting /system/$FILE executable ..."
-		chmod 755 /system/$FILE
-	done
-fi
-
-# remove the device blobs
-echo "Cleaning up ..."
-rm -rf /system/blobs
-
-exit 0
+# update the device name in the prop
+ui_print "Device variant is $DEVICE"
+ui_print "Updating device variant name ..."
+sed -i s/j5[a-z0-9]*/${DEVICE}/g /system/build.prop

@@ -15,14 +15,18 @@
 # limitations under the License.
 #
 
-# Detect system sdk version
-if [ -e /system/build.prop ]; then
-	SDK_VERSION=`cat /system/build.prop | grep 'ro.build.version.sdk' | cut -d '=' -f 2`
+# Detect variant and copy its specific-blobs
+BOOTLOADER=`getprop ro.bootloader`
 
-	if [ ${SDK_VERSION} -gt 25 ]; then
-		echo "Refusing to downgrade system. Wipe data and system first or install proper package."
-		exit 1
-	fi
+case $BOOTLOADER in
+  J510FN*)    VARIANT="xnlte" ;;
+  J510MN*)     VARIANT="xnlte" ;;
+  J510GN*)     VARIANT="xnlte" ;;
+  *)          VARIANT="unknown" ;;
+esac
+
+# exit if the device is unknown
+if [ $VARIANT == "unknown" ]; then
+	ui_print "Unknown device variant detected. Aborting..."
+	exit 1
 fi
-
-exit 0

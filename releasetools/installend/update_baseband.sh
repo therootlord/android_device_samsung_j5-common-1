@@ -15,15 +15,26 @@
 # limitations under the License.
 #
 
-# Detect variant and copy its specific-blobs
-BOOTLOADER=`getprop ro.bootloader`
+# Detect variant
+. /tmp/install/bin/variant_hook.sh
 
-case $BOOTLOADER in
-  J510FN*)    VARIANT="xnlte" ;;
-  J510MN*)     VARIANT="xnlte" ;;
-  J500H*)     VARIANT="3gxx" ;;
-  *)          VARIANT="unknown" ;;
-esac
+RADIO_DIR=/system/RADIO/$VARIANT
+BLOCK_DEV_DIR=/dev/block/bootdevice/by-name
 
-echo "$VARIANT"
-exit 0
+# Mount /system
+mount_fs system
+
+if [ -d ${RADIO_DIR} ]; then
+
+	cd ${RADIO_DIR} 
+
+	# flash the firmware
+	for FILE in `find . -type f | cut -c 3-` ; do
+		ui_print "Flashing ${FILE} to ${BLOCK_DEV_DIR}/${FILE} ..."
+		dd if=${FILE} of=${BLOCK_DEV_DIR}/${FILE}
+	done
+fi
+
+# remove the device blobs
+ui_print "Cleaning up ..."
+rm -rf /system/RADIO
