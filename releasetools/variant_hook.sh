@@ -22,6 +22,7 @@ case $BOOTLOADER in
   J510FN*)    VARIANT="xnlte" ;;
   J510MN*)     VARIANT="xnlte" ;;
   J510GN*)     VARIANT="xnlte" ;;
+  J510H*)     VARIANT="x3g" ;;
   *)          VARIANT="unknown" ;;
 esac
 

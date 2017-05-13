@@ -4,6 +4,6 @@
     <integer name="config_chargingSlowlyThreshold">1305</integer>
 
     <!-- Threshold in milli watts from which a charger is rated as "fast" -->
-    <integer name="config_chargingFastThreshold">3045</integer>
+    <integer name="config_chargingFastThreshold">1505</integer>
 
  </resources>
