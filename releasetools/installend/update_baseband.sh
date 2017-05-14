@@ -15,18 +15,26 @@
 # limitations under the License.
 #
 
-# Detect variant and copy its specific-blobs
-VARIANT=$(/tmp/install/bin/get_variant.sh)
+# Detect variant
+. /tmp/install/bin/variant_hook.sh
 
-# exit if the device is unknown
-if [ $VARIANT == "unknown" ]; then
-	exit 1
+RADIO_DIR=/system/RADIO/$VARIANT
+BLOCK_DEV_DIR=/dev/block/bootdevice/by-name
+
+# Mount /system
+mount_fs system
+
+if [ -d ${RADIO_DIR} ]; then
+
+	cd ${RADIO_DIR} 
+
+	# flash the firmware
+	for FILE in `find . -type f | cut -c 3-` ; do
+		ui_print "Flashing ${FILE} to ${BLOCK_DEV_DIR}/${FILE} ..."
+		dd if=${FILE} of=${BLOCK_DEV_DIR}/${FILE}
+	done
 fi
 
-DEVICE="j5${VARIANT}"
-
-# update the device name in the prop
-echo "Updating device variant name ..."
-sed -i s/j5[a-z]*/${DEVICE}/g /system/build.prop
-
-exit 0
+# remove the device blobs
+ui_print "Cleaning up ..."
+rm -rf /system/RADIO
