@@ -36,28 +36,11 @@
 #include "log.h"
 #include "util.h"
 
-void cdma_properties(char const *operator_alpha,
-		char const *operator_numeric,
-		char const *default_network)
-{
-	/* Dynamic CDMA Properties */
-	property_set("ro.cdma.home.operator.alpha", operator_alpha);
-	property_set("ro.cdma.home.operator.numeric", operator_numeric);
-	property_set("ro.telephony.default_network", default_network);
-
-	/* Static CDMA Properties */
-	property_set("ril.subscription.types", "NV,RUIM");
-	property_set("ro.telephony.default_cdma_sub", "0");
-	property_set("ro.telephony.get_imsi_from_sim", "true");
-	property_set("ro.telephony.ril.config", "newDriverCallU,newDialCode");
-	property_set("telephony.lteOnCdmaDevice", "1");
-}
-
-void gsm_lte_properties(char const * default_network)
-{
+void init_dsds() {
+    property_set("ro.multisim.simslotcount", "2");
+    property_set("persist.radio.multisim.config", "dsds");
 	property_set("persist.radio.lte_vrte_ltd", "1");
 	property_set("telephony.lteOnCdmaDevice", "0");
-	property_set("ro.telephony.default_network", default_network);
 }
 
 void init_target_properties(void)
@@ -70,7 +53,8 @@ void init_target_properties(void)
 		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510GN");
-		gsm_lte_properties("10");
+
+		init_dsds();
 	}
 	else if (bootloader.find("J510MN") == 0) {
 		property_set("ro.build.product", "j5xnlte");
@@ -78,8 +62,8 @@ void init_target_properties(void)
 		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510MN");
-		property_set("persist.radio.rat_on", "combine");
-		property_set("ro.telephony.default_network", "9");
+
+		init_dsds();
 	}
 	else if (bootloader.find("J510FN") == 0) {
 		property_set("ro.build.product", "j5xnlte");
@@ -87,8 +71,8 @@ void init_target_properties(void)
 		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510FN");
-		property_set("persist.radio.rat_on", "combine");
-		property_set("ro.telephony.default_network", "9");
+
+		init_dsds();
 	}
 	else if (bootloader.find("J510H") == 0) {
 		property_set("ro.build.product", "j5x3g");
@@ -96,8 +80,8 @@ void init_target_properties(void)
 		property_set("ro.build.fingerprint", "samsung/lineage_j5x3g/j5x3g:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5x3g");
 		property_set("ro.product.model", "SM-J510H");
-		property_set("persist.radio.rat_on", "combine");
-		property_set("ro.telephony.default_network", "9");
+
+		init_dsds();
 	}
 
 	std::string device = property_get("ro.product.device");
