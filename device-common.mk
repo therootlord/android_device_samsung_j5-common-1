@@ -48,9 +48,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml \
 	$(LOCAL_PATH)/nfc/route.xml:system/etc/param/route.xml \
 	$(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-	$(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-	$(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
-	$(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf
+	$(LOCAL_PATH)/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
 
 # Audio
 PRODUCT_PACKAGES += \
