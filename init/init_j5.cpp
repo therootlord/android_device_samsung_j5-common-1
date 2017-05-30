@@ -49,8 +49,6 @@ void init_target_properties(void)
 
 	if (bootloader.find("J510GN") == 0) {
 		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.2 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510GN");
 
@@ -58,8 +56,6 @@ void init_target_properties(void)
 	}
 	else if (bootloader.find("J510MN") == 0) {
 		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.2 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510MN");
 
@@ -67,8 +63,6 @@ void init_target_properties(void)
 	}
 	else if (bootloader.find("J510FN") == 0) {
 		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.build.description", "lineage_j5xnlte-userdebug 7.1.2 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5xnlte/j5xnlte:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5xnlte");
 		property_set("ro.product.model", "SM-J510FN");
 
@@ -76,8 +70,6 @@ void init_target_properties(void)
 	}
 	else if (bootloader.find("J510H") == 0) {
 		property_set("ro.build.product", "j5x3g");
-		property_set("ro.build.description", "lineage_j5x3g-userdebug 7.1.2 NMF26V 4dae919457 test-keys");
-		property_set("ro.build.fingerprint", "samsung/lineage_j5x3g/j5x3g:7.1.2/NMF26V/4dae919457:userdebug/test-keys");
 		property_set("ro.product.device", "j5x3g");
 		property_set("ro.product.model", "SM-J510H");
 
