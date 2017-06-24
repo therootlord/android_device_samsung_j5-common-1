@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2013, The Linux Foundation. All rights reserved.
+   Copyright (c) 2017, The Linux Foundation. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -27,61 +27,44 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "vendor_init.h"
-#include "property_service.h"
-#include "log.h"
-#include "util.h"
-
-void init_dsds() {
-    property_set("ro.multisim.simslotcount", "2");
-    property_set("persist.radio.multisim.config", "dsds");
-	property_set("persist.radio.lte_vrte_ltd", "1");
-	property_set("telephony.lteOnCdmaDevice", "0");
-}
+#include <init_msm8916.h>
 
 void init_target_properties(void)
 {
+	char *device = NULL;
+	char *model = NULL;
+	char *operator_alpha = NULL;
+	char *operator_numeric = NULL;
+
+	int network_type = 1;
+
+	/* get the bootloader string */
 	std::string bootloader = property_get("ro.bootloader");
 
-	if (bootloader.find("J510GN") == 0) {
-		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.product.device", "j5xnlte");
-		property_set("ro.product.model", "SM-J510GN");
-
-		init_dsds();
+	if (bootloader.find("J510FN") == 0) {
+		device = (char *)"j5xnlte";
+		model = (char *)"SM-J510FN";
+		network_type=LTE_DEVICE;
 	}
 	else if (bootloader.find("J510MN") == 0) {
-		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.product.device", "j5xnlte");
-		property_set("ro.product.model", "SM-J510MN");
-
-		init_dsds();
-	}
-	else if (bootloader.find("J510FN") == 0) {
-		property_set("ro.build.product", "j5xnlte");
-		property_set("ro.product.device", "j5xnlte");
-		property_set("ro.product.model", "SM-J510FN");
-
-		init_dsds();
+		device = (char *)"j5xnlte";
+		model = (char *)"SM-J510MN";
+		network_type=LTE_DEVICE;
 	}
 	else if (bootloader.find("J510H") == 0) {
-		property_set("ro.build.product", "j5x3g");
-		property_set("ro.product.device", "j5x3g");
-		property_set("ro.product.model", "SM-J510H");
-
-		init_dsds();
+		device = (char *)"j5x3g";
+		model = (char *)"SM-J510H";
+		network_type=GSM_DEVICE;
 	}
-
-	std::string device = property_get("ro.product.device");
-	INFO("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), device.c_str());
-}
-
-void vendor_load_properties(void)
-{
-	/* set the device properties */
-	init_target_properties();
+	else if (bootloader.find("J510GN") == 0) {
+		device = (char *)"j5xnlte";
+		model = (char *)"SM-J510GN";
+		network_type=LTE_DEVICE;
+	}
+	else {
+		return;
+	}
+	/* set the properties */
+	set_target_properties((char *)bootloader.c_str(), device, model,
+		       network_type, operator_alpha, operator_numeric);
 }
