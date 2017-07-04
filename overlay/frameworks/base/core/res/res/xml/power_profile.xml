@@ -19,8 +19,11 @@
         <value>4</value>
     </array>
     <array name="cpu.speeds">
+        <value>1497600</value>
+        <value>1401600</value>
+        <value>1363200</value>
+        <value>1248000</value>
         <value>1209600</value>
-        <value>1190400</value>
         <value>1152000</value>
         <value>1094400</value>
         <value>998400</value>
